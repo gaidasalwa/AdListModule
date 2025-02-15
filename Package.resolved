@@ -1,6 +1,15 @@
 {
-  "originHash" : "2247b2d0bc02726cc0c745177e2f624e716d7b4f9c6257d8d134f6badf346f55",
+  "originHash" : "864981eee8d2c85fe07e825432b2674089c863dbe1746b59a9d95eee9142b11f",
   "pins" : [
+    {
+      "identity" : "addetailsmodule",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gaidasalwa/AdDetailsModule.git",
+      "state" : {
+        "revision" : "96c58e8410bb704ff839c0d6293f084507f4a02e",
+        "version" : "1.1.0"
+      }
+    },
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
@@ -8,6 +17,42 @@
       "state" : {
         "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
         "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "appcoordinatormodule",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gaidasalwa/AppCoordinatorModule.git",
+      "state" : {
+        "revision" : "3598ca542cc5636296e250d2304b22a8396715ab",
+        "version" : "1.1.0"
+      }
+    },
+    {
+      "identity" : "appdi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gaidasalwa/AppDI.git",
+      "state" : {
+        "revision" : "5958b9f082aae810e226d65240472123ba29cf16",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "appmodels",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gaidasalwa/AppModels.git",
+      "state" : {
+        "revision" : "64bfaed3df02bab860b73415ac72880fb2824321",
+        "version" : "1.0.0"
+      }
+    },
+    {
+      "identity" : "coremodule",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/gaidasalwa/CoreModule.git",
+      "state" : {
+        "revision" : "4f1c23349bac034dcb2c5267e531f4d7da10b853",
+        "version" : "1.0.0"
       }
     },
     {
