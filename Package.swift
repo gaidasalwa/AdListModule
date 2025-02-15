@@ -15,10 +15,10 @@ let package = Package(
             targets: ["AdListModule"]),
     ],
     dependencies: [
-        .package(path: "../CoreModule"),
-        .package(path: "../AppDI"),
-        .package(path: "../AppCoordinatorModule"),
-        .package(path: "../AdDetailsModule")
+        .package(url: "https://github.com/gaidasalwa/CoreModule.git", from: "1.0.0"),
+        .package(url: "https://github.com/gaidasalwa/AppDI.git", from: "1.0.0"),
+        .package(url: "https://github.com/gaidasalwa/AppCoordinatorModule.git", from: "1.1.0"),
+        .package(url: "https://github.com/gaidasalwa/AdDetailsModule.git", from: "1.1.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
