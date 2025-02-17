@@ -44,14 +44,14 @@ public struct AdListingView: View {
                     }
                 } else {
                     VStack {
-                        // ✅ Toggle pour choisir la navigation
+                        // Toggle pour choisir la navigation
                         Toggle("Utiliser UIKit Coordinator", isOn: $useUIKitCoordinator)
                             .padding()
                         ScrollView {
-                            LazyVGrid(columns: columns, spacing: 10) {
+                            LazyVGrid(columns: columns, spacing: 16) {
                                 ForEach(viewModel.ads, id: \.id) { ad in
                                     ZStack {
-                                        // ✅ NavigationLink caché
+                                        // NavigationLink caché
                                         NavigationLink(
                                             destination: AdDetailViewControllerWrapper(ad: ad),
                                             tag: ad,
@@ -99,5 +99,11 @@ public struct AdListingView: View {
         Task {
             await viewModel.fetchAds()
         }
+    }
+}
+
+struct AdListingView_Previews: PreviewProvider {
+    static var previews: some View {
+        AdListingView()
     }
 }

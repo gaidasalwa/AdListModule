@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gaidasalwa/AppDI.git",
       "state" : {
-        "revision" : "5958b9f082aae810e226d65240472123ba29cf16",
-        "version" : "1.0.0"
+        "revision" : "cd6711bcc681945808672ab61d0ff06fa88712ec",
+        "version" : "1.1.0"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gaidasalwa/CoreModule.git",
       "state" : {
-        "revision" : "4f1c23349bac034dcb2c5267e531f4d7da10b853",
-        "version" : "1.0.0"
+        "revision" : "370422524d7d00f362c60d96d14e1eb19329d8a7",
+        "version" : "1.2.0"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gaidasalwa/Extensions.git",
       "state" : {
-        "revision" : "ff52afcfb6010574bae1831e1e904ffa40fad036",
-        "version" : "1.0.0"
+        "revision" : "dc010c279e9058732a570dc12ff5cf76e8dcd1c7",
+        "version" : "1.4.0"
       }
     },
     {
@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "c7c7d2cf50a3211fe2843f76869c698e4e417930",
-        "version" : "6.8.0"
+        "revision" : "5dd1907d64f0d36f158f61a466bab75067224893",
+        "version" : "6.9.0"
       }
     }
   ],

@@ -35,6 +35,7 @@ final class AdViewModel: ObservableObject {
             do {
                 let response = try await fetchAdsUseCase.fetchAds(after: "67462abca4ddfca45fe05311")
                 ads.append(contentsOf: response)
+                ads.sort { $0.createdSince < $1.createdSince } // afficher le plus récent en premier
             } catch {
                 self.errorMessage = error.localizedDescription
                 print("Erreur lors du chargement des annonces :", error)

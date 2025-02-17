@@ -25,23 +25,27 @@ struct AdCardView: View {
                 .clipped()
             }
             
-            VStack(alignment: .leading, spacing: 5) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(ad.title)
-                    .font(.headline)
+                    .font(.subheadline)
                     .foregroundColor(.black)
                 
                 HStack {
-                    Image(systemName: "clock")
-                    Text("\(String(describing: ad.createdSince)) min")
-                    Image(systemName: "mappin.and.ellipse")
-                    Text("\(ad.distance) km")
+                    HStack(spacing: 4) {
+                        Image(systemName: "clock")
+                        Text("\(String(describing: ad.createdSince)) min")
+                    }
+                    HStack(spacing: 4) {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("\(ad.distance) km")
+                    }
                 }
                 .font(.footnote)
                 .foregroundColor(.gray)
             }
-            .padding(8)
+            .padding(4)
         }
-        .frame(width: 160, height: 200) // Taille uniforme
+        .frame(width: 170, height: 210) // Taille uniforme
         .background(Color.white)
         .cornerRadius(10)
         .shadow(radius: 2)
