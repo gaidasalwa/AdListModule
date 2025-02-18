@@ -12,46 +12,58 @@ import CoreModule
 import AppCoordinatorModule
 
 public struct AdListingView: View {
-    @StateObject private var viewModel = AdViewModel(
-        fetchAdsUseCase: FetchAdsUseCase(httpClient: HTTPClient()),
-        coordinator: UIKitCoordinator(navigationController: UINavigationController())
-    )
-    @State private var useUIKitCoordinator = false // ✅ Choix de navigation
+    
+    /// ViewModel qui gère la logique et les données des annonces
+    @StateObject private var viewModel: AdViewModel
+    
+    /// Stocker la préférence utilisateur pour utiliser UIKit ou SwiftUI pour la navigation
+    @AppStorage("useUIKitNavigation") private var useUIKitNavigation: Bool = false
+    
+    /// Gèrer la sélection d'une annonce pour la navigation SwiftUI
     @State private var selectedAd: Ad?
     
-    // Définition des colonnes de la grille
+    /// Définition des colonnes pour l'affichage en grille des annonces
     let columns = [
         GridItem(.flexible(), spacing: 10),
         GridItem(.flexible(), spacing: 10)
     ]
     
-    public init() {}
+    /// Initialisation avec injection du `viewModel`
+    public init(viewModel: AdViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     public var body: some View {
         NavigationView {
             Group {
-                if viewModel.isLoading {
-                    ProgressView("Chargement des annonces...") // 🔄 Affichage du spinner
+                /// Affichage d'un spinner pendant le chargement initial
+                if viewModel.isLoading && viewModel.ads.isEmpty {
+                    ProgressView("Chargement des annonces...")
+                    
+                    /// Affichage d'un message d'erreur si une erreur survient
                 } else if let error = viewModel.errorMessage {
                     VStack {
                         Text("❌ Erreur : \(error)")
                             .foregroundColor(.red)
                             .padding()
+                        
+                        /// Bouton permettant de relancer le chargement des annonces en cas d'erreur
                         Button("Réessayer") {
                             fetchAds()
                         }
                         .buttonStyle(.borderedProminent)
                     }
+                    
+                    /// Affichage des annonces sous forme de grille
                 } else {
                     VStack {
-                        // Toggle pour choisir la navigation
-                        Toggle("Utiliser UIKit Coordinator", isOn: $useUIKitCoordinator)
-                            .padding()
+                        /// Liste des annonces affichées sous forme de grille
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 16) {
-                                ForEach(viewModel.ads, id: \.id) { ad in
+                                /// Parcours des annonces et affichage sous forme de cartes
+                                ForEach(Array(viewModel.ads.enumerated()), id: \.element.id) { index, ad in
                                     ZStack {
-                                        // NavigationLink caché
+                                        /// `NavigationLink` caché pour gérer la navigation SwiftUI
                                         NavigationLink(
                                             destination: AdDetailViewControllerWrapper(ad: ad),
                                             tag: ad,
@@ -60,7 +72,10 @@ public struct AdListingView: View {
                                             EmptyView()
                                         }
                                         .hidden() // Rendre invisible
+                                        
+                                        /// Carte représentant une annonce
                                         AdCardView(ad: ad)
+                                        /// Détection du moment où l'utilisateur atteint la dernière annonce pour charger plus de données
                                             .onAppear {
                                                 if viewModel.shouldLoadMore(ad: ad) {
                                                     Task {
@@ -68,8 +83,9 @@ public struct AdListingView: View {
                                                     }
                                                 }
                                             }
+                                        /// Gestion du clic pour la navigation SwiftUI ou UIKit
                                             .onTapGesture {
-                                                if useUIKitCoordinator {
+                                                if useUIKitNavigation {
                                                     viewModel.showAdDetail(ad: ad) // Navigation UIKit
                                                 } else {
                                                     selectedAd = ad // Navigation SwiftUI
@@ -84,17 +100,25 @@ public struct AdListingView: View {
                 }
             }
             
+            /// Rafraîchir les annonces en pull to refresh
             .refreshable {
                 fetchAds()
             }
+            
+            /// Chargement initial des annonces au premier affichage
             .onAppear {
-                fetchAds()
+                if viewModel.ads.isEmpty {
+                    fetchAds()
+                }
             }
+            
+            /// Personnalisation de la barre de navigation
             .navigationTitle("Annonces")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
         }
     }
     
+    /// Charger les annonces
     private func fetchAds() {
         Task {
             await viewModel.fetchAds()
@@ -102,8 +126,8 @@ public struct AdListingView: View {
     }
 }
 
-struct AdListingView_Previews: PreviewProvider {
-    static var previews: some View {
-        AdListingView()
-    }
-}
+//struct AdListingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AdListingView()
+//    }
+//}
